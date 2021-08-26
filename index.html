@@ -7,43 +7,8 @@
     <title>VUE.JS Learning</title>
   </head>
   <body>
-    <div id="shopping-list">
-      <header>
-        <h1>{{header || 'Welcome'}}</h1>
-        <button v-if="editing" @click="doEdit">Cancel</button>
-        <button v-else @click="doEdit">Add item</button>
-      </header>
-      <div v-if="editing">
-        <input
-          type="text"
-          @keyup.enter="saveItem"
-          v-model="newItem"
-          placeholder="Add an item"
-        />
-
-        <label for=""
-          ><input type="checkbox" v-model="newItemPriority" />Hign
-          Priority</label
-        >
-        <button @click="saveItem" :disabled="newItem.length === 0">
-          Add Item
-        </button>
-        <ul>
-          <li
-            v-for="item in items"
-            @click="togglePurchased(item)"
-            :key="item.id"
-            class="static-class"
-            :class="{
-             strikeout: item.purchased,
-             priority: item.highPriority
-          }"
-          >
-            {{item.title}}
-          </li>
-        </ul>
-      </div>
-      <p>Nice job! You`ve bought all your items!</p>
+    <div id="app">
+      <plan v-for="plan in plans" :key="plan.id" :name="plan.name"></plan>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>

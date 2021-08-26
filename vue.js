@@ -1,35 +1,44 @@
-const shoppingList = Vue.createApp({
+const app = Vue.createApp({
   data() {
     return {
-      header: 'Shopping List App',
-      newItem: '',
-      newItemPriority: false,
-      editing: false,
-      purchased: false,
-      items: [
-        { id: 1, title: '10 hats' },
-        { id: 2, title: '5 cups' },
-        { id: 3, title: '2 games' },
-      ],
+      usernames: ['hootlex', 'vadiminsk'],
     };
   },
-  methods: {
-    saveItem() {
-      this.items.push({
-        id: this.items.length + 1,
-        title: this.newItem,
-        highPriority: this.newItemPriority,
-      });
-      this.newItem = '';
-      this.newItemPriority = false;
-    },
-    doEdit() {
-      this.editing = !this.editing;
-      this.newItem = '';
-      this.newItemPriority = false;
-    },
-    togglePurchased(item) {
-      item.purchased = !item.purchased;
+});
+
+app.component('github-user-card', {
+  props: {
+    username: {
+      type: String,
+      required: true,
     },
   },
-}).mount('#shopping-list');
+  data() {
+    return {
+      user: {},
+    };
+  },
+  created() {
+    axios
+      .get(`https://api.github.com/users/${this.username}`)
+      .then((response) => (this.user = response.data));
+  },
+  template: `
+    <div class="col">
+      <div class="card" style="width: 18rem">
+        <img :src="user.avatar_url" class="card-img-top" :alt="user.name" />
+        <div class="card-body">
+          <h5 class="card-title">
+          <a :href="user.html_url" target="blank">{{user.name}}</a>
+          </h5>
+          <p class="card-text">
+            {{user.bio}}
+          </p>
+          <p><strong>Location:</strong> {{user.location}}</p>
+        </div>
+      </div>
+    </div>
+  `,
+});
+
+app.mount('#app');

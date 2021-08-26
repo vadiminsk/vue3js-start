@@ -1,23 +1,13 @@
-const app = Vue.createApp({
+const app = Vue.createApp({});
+
+app.component('page-layout', {
   data() {
     return {
-      plans: [
-        { id: 1, name: 'Create App' },
-        { id: 2, name: 'Buld VueJS App' },
-        { id: 3, name: 'Rebuild the project' },
-      ],
+      completed: false,
     };
   },
-});
 
-app.component('plan', {
-  props: {
-    name: String,
-  },
-
-  template: `<div>
-        <span>{{name}}</span>
-      </div>`,
+  template: '#page-template',
 });
 
 app.mount('#app');

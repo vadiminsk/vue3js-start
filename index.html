@@ -5,12 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VUE.JS Learning</title>
+    <style>
+      .done {
+        color: green;
+        text-decoration: line-through;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
-      <plan v-for="plan in plans" :key="plan.id" :name="plan.name"></plan>
+      <page-layout>
+        <template #header>
+          <h1>This is the header</h1>
+        </template>
+
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro,
+          excepturi.
+        </p>
+
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+
+        <template #footer>
+          <h2>This is the footer</h2>
+        </template>
+      </page-layout>
     </div>
 
+    <script type="text/x-template" id="page-template">
+      <div>
+
+        <slot name="header"></slot>
+        <slot></slot>
+        <slot name="footer"></slot>
+      </div>
+    </script>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="./vue.js"></script>
   </body>

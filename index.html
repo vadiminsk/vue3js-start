@@ -11,15 +11,23 @@
       crossorigin="anonymous"
     />
     <title>VUE.JS Learning</title>
+    <style>
+      .toast {
+        opacity: 1 !important;
+      }
+      .error {
+        background: #ff2222;
+      }
+      .success {
+        background: #2cee6d;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
-      <div class="row row-cols-1 row-cols-md-2 g-4 mt-5 p-3">
-        <github-user-card
-          v-for="user in usernames"
-          :username="user"
-        ></github-user-card>
-      </div>
+      <alert-card type="error" header="Oh no!"></alert-card>
+      <p>Hello, world! This is a toast message.</p>
+      <alert-card type="success" header="Oh yes!"></alert-card>
     </div>
 
     <script

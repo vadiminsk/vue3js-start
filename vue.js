@@ -6,38 +6,37 @@ const app = Vue.createApp({
   },
 });
 
-app.component('github-user-card', {
+app.component('alert-card', {
   props: {
-    username: {
+    type: {
       type: String,
-      required: true,
+    },
+    header: {
+      type: String,
     },
   },
+
   data() {
     return {
-      user: {},
+      hidden: false,
     };
   },
-  created() {
-    axios
-      .get(`https://api.github.com/users/${this.username}`)
-      .then((response) => (this.user = response.data));
+
+  methods: {
+    hide() {
+      this.hidden = !this.hidden;
+    },
   },
+
   template: `
-    <div class="col">
-      <div class="card" style="width: 18rem">
-        <img :src="user.avatar_url" class="card-img-top" :alt="user.name" />
-        <div class="card-body">
-          <h5 class="card-title">
-          <a :href="user.html_url" target="blank">{{user.name}}</a>
-          </h5>
-          <p class="card-text">
-            {{user.bio}}
-          </p>
-          <p><strong>Location:</strong> {{user.location}}</p>
-        </div>
+   <div v-if="!hidden" class="toast" :class="type" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto">{{header}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" @click="hide"></button>
       </div>
-    </div>
+    
+      <slot></slot>
+  </div>
   `,
 });
 

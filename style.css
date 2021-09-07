@@ -1,0 +1,22 @@
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: #49d33c;
+  color: aliceblue;
+}
+
+.purple {
+  background: #767dea;
+}
+
+.text-black {
+  color: #333;
+}
+
+.text-orange {
+  color: #ffc26f;
+}

@@ -9,28 +9,20 @@
   </head>
   <body>
     <div id="app">
-      <h1>{{fullName}}</h1>
-      <hr />
-      <p><a :href="url" target="_blank">Google</a></p>
-      <p v-html="raw_url"></p>
-      <p>{{typeof age}}</p>
-      <label for="firstName">First Name</label>
-      <input type="text" id="firstName" v-model.lazy.trim="firstName" />
-      <br />
+      <label for="inputCheckbox"
+        ><input type="checkbox" id="inputCheckbox" v-model="isPurple" />
+        Check</label
+      >
 
-      <label for="lastName">last Name</label>
-      <input
-        type="text"
-        id="lastName"
-        :value="lastName"
-        @input.prevent="updateLastName('Event was triggered', $event)"
-      />
-      <br />
-      <label for="age">Age</label>
-      <input type="number" v-model.number="age" /> <br />
       <hr />
-      <button @click="increment">Increment</button>
-      <button @click="decrement">Decrement</button>
+
+      <div class="circle" :class="[selectedColor, circleClasses]">Hi</div>
+
+      <select name="" id="" v-model="selectedColor">
+        <option value="">White</option>
+        <option value="text-black">Black</option>
+        <option value="text-orange">Orange</option>
+      </select>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>

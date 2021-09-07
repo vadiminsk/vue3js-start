@@ -9,54 +9,7 @@
   </head>
   <body>
     <div id="app">
-      <div class="container">
-        <h1>CSS3 Perspecive Playground</h1>
-        <div class="wrapper">
-          <div class="block">
-            <div class="block__item">
-              <label for="">perspective: {{perspective}}px</label>
-              <input type="range" min="0" max="999" v-model="perspective" />
-            </div>
-            <div class="block__item">
-              <label for="rotatex">rotateX: {{rotateX}}deg</label>
-              <input
-                type="range"
-                id="rotatex"
-                min="-180"
-                max="180"
-                v-model="rotateX"
-              />
-            </div>
-            <div class="block__item">
-              <label for="rotatey">rotateY: {{rotateY}}deg</label>
-              <input
-                type="range"
-                id="rotatey"
-                min="-180"
-                max="180"
-                v-model="rotateY"
-              />
-            </div>
-            <div class="block__item">
-              <label for="rotatez">rotateZ: {{rotateZ}}deg</label>
-              <input
-                type="range"
-                id="rotatez"
-                min="-180"
-                max="180"
-                v-model="rotateZ"
-              />
-            </div>
-          </div>
-          <div class="block">
-            <div class="element">
-              <div class="element__inner" :style="box"></div>
-            </div>
-          </div>
-        </div>
-        <button @click.prevent="reset">Reset</button>
-        <button @click.prevent="copy">Copy</button>
-      </div>
+      <div class="container"><hello></hello></div>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>

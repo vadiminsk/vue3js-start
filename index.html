@@ -9,22 +9,54 @@
   </head>
   <body>
     <div id="app">
-      <div class="block" v-if="mode == 1">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque,
-        facere!
+      <div class="container">
+        <h1>CSS3 Perspecive Playground</h1>
+        <div class="wrapper">
+          <div class="block">
+            <div class="block__item">
+              <label for="">perspective: {{perspective}}px</label>
+              <input type="range" min="0" max="999" v-model="perspective" />
+            </div>
+            <div class="block__item">
+              <label for="rotatex">rotateX: {{rotateX}}deg</label>
+              <input
+                type="range"
+                id="rotatex"
+                min="-180"
+                max="180"
+                v-model="rotateX"
+              />
+            </div>
+            <div class="block__item">
+              <label for="rotatey">rotateY: {{rotateY}}deg</label>
+              <input
+                type="range"
+                id="rotatey"
+                min="-180"
+                max="180"
+                v-model="rotateY"
+              />
+            </div>
+            <div class="block__item">
+              <label for="rotatez">rotateZ: {{rotateZ}}deg</label>
+              <input
+                type="range"
+                id="rotatez"
+                min="-180"
+                max="180"
+                v-model="rotateZ"
+              />
+            </div>
+          </div>
+          <div class="block">
+            <div class="element">
+              <div class="element__inner" :style="box"></div>
+            </div>
+          </div>
+        </div>
+        <button @click.prevent="reset">Reset</button>
+        <button @click.prevent="copy">Copy</button>
       </div>
-      <div class="block" v-else-if="mode == 2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quasi
-        inventore aspernatur labore eum. Atque dolores velit fugit explicabo
-        voluptatum!
-      </div>
-      <div class="block" v-else>Lorem.</div>
-
-      <select name="select" id="select" v-model="mode">
-        <option value="1">v-if</option>
-        <option value="2">v-if-else</option>
-        <option value="3">v-else</option>
-      </select>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>

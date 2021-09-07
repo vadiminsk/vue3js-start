@@ -17,12 +17,14 @@
       <label for="firstName">First Name</label>
       <input type="text" id="firstName" v-model="firstName" />
       <br />
+      <label for="middleName"></label>
+      <input type="text" id="middleName" @keyup="updateMiddleName" />
       <label for="lastName">last Name</label>
       <input
         type="text"
         id="lastName"
         :value="lastName"
-        @input="updateLastName('Event was triggered', $event)"
+        @input.prevent="updateLastName('Event was triggered', $event)"
       />
       <hr />
       <button @click="increment">Increment</button>

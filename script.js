@@ -2,6 +2,7 @@ const vm = Vue.createApp({
   data() {
     return {
       firstName: 'Vadim',
+      middleName: '',
       lastName: 'Gadjimuradov',
       url: 'https://www.google.com/',
       raw_url: '<a href="https://www.google.com/" target="_blank">Google</a>',
@@ -22,10 +23,13 @@ const vm = Vue.createApp({
       this.age--;
     },
 
-    updateSecondName(msg, event) {
-      event.preventDefault();
+    updateLastName(msg, event) {
       console.log(msg);
       this.lastName = event.target.value;
+    },
+
+    updateMiddleName(event) {
+      this.middleName = event.target.value;
     },
   },
 }).mount('#app');

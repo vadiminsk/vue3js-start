@@ -9,19 +9,21 @@
   </head>
   <body>
     <div id="app">
-      <label for="inputCheckbox"
-        ><input type="checkbox" id="inputCheckbox" v-model="isPurple" />
-        Check</label
-      >
+      <div class="block" v-if="mode == 1">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque,
+        facere!
+      </div>
+      <div class="block" v-else-if="mode == 2">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio quasi
+        inventore aspernatur labore eum. Atque dolores velit fugit explicabo
+        voluptatum!
+      </div>
+      <div class="block" v-else>Lorem.</div>
 
-      <hr />
-
-      <div class="circle" :class="[selectedColor, circleClasses]">Hi</div>
-
-      <select name="" id="" v-model="selectedColor">
-        <option value="">White</option>
-        <option value="text-black">Black</option>
-        <option value="text-orange">Orange</option>
+      <select name="select" id="select" v-model="mode">
+        <option value="1">v-if</option>
+        <option value="2">v-if-else</option>
+        <option value="3">v-else</option>
       </select>
     </div>
 

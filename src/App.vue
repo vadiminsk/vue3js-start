@@ -1,29 +1,29 @@
 <template>
-  <app-form>
-    <form action="">
-      <div class="help">
-        <p>This is some help text</p>
-      </div>
-      <div class="fields">
-        <input type="email" placeholder="email" />
-        <input type="text" placeholder="username" />
-        <input type="password" placeholder="password" />
-      </div>
-      <div class="buttons">
-        <button type="submit">Submit</button>
-      </div>
-    </form>
-  </app-form>
-  <app-form></app-form>
+  <div class="root">
+    <select v-model="componentName" name="selectpage" id="selectpage">
+      <option value="Home">Home</option>
+      <option value="About">About</option>
+    </select>
+
+    <keep-alive><component :is="componentName"></component></keep-alive>
+  </div>
 </template>
 
 <script>
-import AppForm from './components/AppForm.vue';
+import About from './components/About.vue';
+import Home from './components/Home.vue';
 
 export default {
   name: 'App',
   components: {
-    AppForm,
+    Home,
+    About,
+  },
+
+  data() {
+    return {
+      componentName: 'Home',
+    };
   },
 };
 </script>

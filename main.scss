@@ -1,3 +1,6 @@
+$baseColor: red;
+
 h1 {
-  color: red;
+  color: $baseColor;
+  transform: rotate(348deg);
 }

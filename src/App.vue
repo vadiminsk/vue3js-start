@@ -1,26 +1,29 @@
 <template>
-  <div class="wrapper">
-    <h3>Hey!</h3>
-    <greeting :age="age"></greeting>
-    <user :age="age" @age-change="age++"></user>
-  </div>
+  <app-form>
+    <form action="">
+      <div class="help">
+        <p>This is some help text</p>
+      </div>
+      <div class="fields">
+        <input type="email" placeholder="email" />
+        <input type="text" placeholder="username" />
+        <input type="password" placeholder="password" />
+      </div>
+      <div class="buttons">
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </app-form>
+  <app-form></app-form>
 </template>
 
 <script>
-import Greeting from './components/Greeting.vue';
-import User from './components/User.vue';
+import AppForm from './components/AppForm.vue';
 
 export default {
   name: 'App',
   components: {
-    Greeting,
-    User,
-  },
-
-  data() {
-    return {
-      age: 20,
-    };
+    AppForm,
   },
 };
 </script>

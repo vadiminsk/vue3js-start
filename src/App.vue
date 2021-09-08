@@ -1,9 +1,8 @@
 <template>
   <div class="wrapper">
     <h3>Hey!</h3>
-    <button type="button" @click="age++">Update the age</button>
     <greeting :age="age"></greeting>
-    <user :age="age"></user>
+    <user :age="age" @age-change="age++"></user>
   </div>
 </template>
 

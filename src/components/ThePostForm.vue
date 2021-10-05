@@ -3,17 +3,16 @@
     <h3>Create new post</h3>
     <div class="form-item">
       <label for="input-title">
-        <input
+        <app-input
           v-model="post.title"
           id="input-title"
-          type="text"
           placeholder="Post title"
         />
       </label>
     </div>
     <div class="form-item">
       <label for="input-body">
-        <input
+        <app-input
           v-model="post.body"
           id="input-body"
           type="text"
@@ -26,11 +25,7 @@
 </template>
 
 <script>
-import AppButton from "@/components/UI/AppButton";
 export default {
-  components: {
-    AppButton,
-  },
   data() {
     return {
       post: {
@@ -57,14 +52,6 @@ export default {
 
 .app-form h3 {
   margin-bottom: 2rem;
-}
-
-.app-form input {
-  height: 48px;
-  width: 100%;
-  padding: 10px 15px;
-  margin-bottom: 1rem;
-  border: 1px solid rgb(99, 204, 181);
 }
 
 .app-form .btn {

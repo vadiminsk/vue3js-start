@@ -5,7 +5,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "app-button",
+};
 </script>
 
 <style scoped>

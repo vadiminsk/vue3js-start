@@ -11,12 +11,7 @@
 </template>
 
 <script>
-import AppButton from "@/components/UI/AppButton";
-
 export default {
-  components: {
-    AppButton,
-  },
   props: {
     post: {
       type: Object,

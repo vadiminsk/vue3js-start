@@ -93,6 +93,7 @@ export default {
 
 .app {
   padding: 15px;
+  overflow: hidden;
 }
 
 .app__btns {

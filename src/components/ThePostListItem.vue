@@ -1,8 +1,8 @@
 <template>
   <div class="post">
     <div>
-      <strong>{{ post.title }}</strong>
-      <p>{{ post.body }}</p>
+      <p><strong>Title:</strong> {{ post.title }}</p>
+      <p><strong>Description:</strong> {{ post.body }}</p>
     </div>
     <div class="post__btns">
       <app-button @click="deletePost">Delete</app-button>

@@ -1,13 +1,18 @@
 <template>
   <div class="app">
     <h1>Posts</h1>
-    <app-button @click="openDialog" style="margin: 20px 0"
-      >Create post</app-button
-    >
+    <div class="app__btns">
+      <app-button @click="openDialog">Create post</app-button>
+      <app-select v-model="selectedSort" :options="sortOptions" />
+    </div>
     <app-dialog v-model:show="dialogVisible">
       <the-post-form @create="createPost"></the-post-form>
     </app-dialog>
-    <the-post-list :posts="posts" @delete="removePost" v-if="!isPostLoading" />
+    <the-post-list
+      :posts="sortedPosts"
+      @delete="removePost"
+      v-if="!isPostLoading"
+    />
     <div v-else>Loading...</div>
   </div>
 </template>
@@ -27,6 +32,11 @@ export default {
       posts: [],
       dialogVisible: false,
       isPostLoading: false,
+      selectedSort: "",
+      sortOptions: [
+        { value: "title", name: "By name" },
+        { value: "body", name: "By body" },
+      ],
     };
   },
 
@@ -62,6 +72,15 @@ export default {
   mounted() {
     this.fetchPosts();
   },
+  computed: {
+    sortedPosts() {
+      return [...this.posts].sort((post1, post2) => {
+        return post1[this.selectedSort]?.localeCompare(
+          post2[this.selectedSort]
+        );
+      });
+    },
+  },
 };
 </script>
 
@@ -74,5 +93,11 @@ export default {
 
 .app {
   padding: 15px;
+}
+
+.app__btns {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
 }
 </style>

@@ -5,7 +5,7 @@
       <p>{{ post.body }}</p>
     </div>
     <div class="post__btns">
-      <app-button>Delete</app-button>
+      <app-button @click="deletePost">Delete</app-button>
     </div>
   </div>
 </template>
@@ -16,6 +16,12 @@ export default {
     post: {
       type: Object,
       required: true,
+    },
+  },
+
+  methods: {
+    deletePost() {
+      this.$emit("delete", this.post);
     },
   },
 };

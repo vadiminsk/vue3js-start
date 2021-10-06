@@ -1,17 +1,21 @@
 <template>
   <div class="app">
     <h1>Posts</h1>
-    <app-button @click="openDialog">Create post</app-button>
+    <app-button @click="openDialog" style="margin: 20px 0"
+      >Create post</app-button
+    >
     <app-dialog v-model:show="dialogVisible">
       <the-post-form @create="createPost"></the-post-form>
     </app-dialog>
-    <the-post-list :posts="posts" @delete="removePost"></the-post-list>
+    <the-post-list :posts="posts" @delete="removePost" v-if="!isPostLoading" />
+    <div v-else>Loading...</div>
   </div>
 </template>
 
 <script>
 import ThePostForm from "@/components/ThePostForm";
 import ThePostList from "@/components/ThePostList";
+import axios from "axios";
 
 export default {
   components: {
@@ -20,24 +24,9 @@ export default {
   },
   data() {
     return {
-      posts: [
-        {
-          id: 1,
-          title: "JavaScript",
-          body: "Learn basic Javascript",
-        },
-        {
-          id: 2,
-          title: "VueJS",
-          body: "Learn VueJs and create app",
-        },
-        {
-          id: 3,
-          title: "NuxtJS",
-          body: "NuxtJS with new functionallity",
-        },
-      ],
+      posts: [],
       dialogVisible: false,
+      isPostLoading: false,
     };
   },
 
@@ -54,6 +43,24 @@ export default {
     removePost(post) {
       this.posts = this.posts.filter((p) => p.id !== post.id);
     },
+
+    async fetchPosts() {
+      try {
+        this.isPostLoading = true;
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+        );
+        this.posts = response.data;
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.isPostLoading = false;
+      }
+    },
+  },
+
+  mounted() {
+    this.fetchPosts();
   },
 };
 </script>

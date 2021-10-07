@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 style="text-align: center; margin-bottom: 30px;">Posts list App</h1>
     <div>
       <app-input v-model="searchQuery" placeholder="Search..." />
     </div>

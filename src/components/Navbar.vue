@@ -2,7 +2,7 @@
   <div class="navbar">
     <h3 @click="$router.push('/')">Site logo</h3>
     <div class="navbar__btns">
-      <app-button @click="$router.push('/users')">Users</app-button>
+      <app-button @click="$router.push('/posts')">Posts</app-button>
       <app-button @click="$router.push('/about')">About Us</app-button>
     </div>
   </div>

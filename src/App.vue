@@ -1,7 +1,9 @@
 <template>
   <div class="app">
-    <h1>Posts</h1>
-    <app-input v-model="searchQuery" placeceholder="Search..." />
+    <div>
+      <h2>Search</h2>
+      <app-input v-model="searchQuery" placeceholder="Search..." />
+    </div>
     <div class="app__btns">
       <app-button @click="openDialog">Create post</app-button>
       <app-select v-model="selectedSort" :options="sortOptions" />
@@ -15,6 +17,17 @@
       v-if="!isPostLoading"
     />
     <div v-else>Loading...</div>
+    <ul class="page__wrapper">
+      <li
+        v-for="pageNumber in totalPages"
+        :key="pageNumber"
+        class="page"
+        :class="{ 'current-page': page === pageNumber }"
+        @click="changePage(pageNumber)"
+      >
+        <a href="#">{{ pageNumber }}</a>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -39,6 +52,9 @@ export default {
         { value: "title", name: "By name" },
         { value: "body", name: "By body" },
       ],
+      page: 1,
+      limit: 10,
+      totalPages: 0,
     };
   },
 
@@ -60,7 +76,16 @@ export default {
       try {
         this.isPostLoading = true;
         const response = await axios.get(
-          "https://jsonplaceholder.typicode.com/posts?_limit=10"
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            params: {
+              _page: this.page,
+              _limit: this.limit,
+            },
+          }
+        );
+        this.totalPages = Math.ceil(
+          response.headers["x-total-count"] / this.limit
         );
         this.posts = response.data;
       } catch (error) {
@@ -68,6 +93,10 @@ export default {
       } finally {
         this.isPostLoading = false;
       }
+    },
+
+    changePage(pageNumber) {
+      this.page = pageNumber;
     },
   },
 
@@ -86,6 +115,11 @@ export default {
       return this.sortedPosts.filter((post) =>
         post.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
+    },
+  },
+  watch: {
+    page() {
+      this.fetchPosts();
     },
   },
 };
@@ -107,5 +141,36 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 15px 0;
+}
+
+.page__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+}
+
+.page__wrapper .page {
+  display: flex;
+  justify-content: center;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 5px;
+  border: 1px solid rgb(99, 204, 181);
+  border-radius: 8px;
+}
+
+.page__wrapper .page:not(:last-child) {
+  margin-right: 10px;
+}
+
+.page__wrapper .page a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+.page.current-page {
+  border-color: transparent;
+  background-color: #eee;
 }
 </style>

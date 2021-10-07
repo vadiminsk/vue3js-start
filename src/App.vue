@@ -1,8 +1,8 @@
 <template>
   <div class="app">
+    <h1 style="text-align: center; margin-bottom: 30px;">Posts list App</h1>
     <div>
-      <h2>Search</h2>
-      <app-input v-model="searchQuery" placeceholder="Search..." />
+      <app-input v-model="searchQuery" placeholder="Search..." />
     </div>
     <div class="app__btns">
       <app-button @click="openDialog">Create post</app-button>
@@ -17,17 +17,7 @@
       v-if="!isPostLoading"
     />
     <div v-else>Loading...</div>
-    <ul class="page__wrapper">
-      <li
-        v-for="pageNumber in totalPages"
-        :key="pageNumber"
-        class="page"
-        :class="{ 'current-page': page === pageNumber }"
-        @click="changePage(pageNumber)"
-      >
-        <a href="#">{{ pageNumber }}</a>
-      </li>
-    </ul>
+    <div ref="observer"></div>
   </div>
 </template>
 
@@ -95,13 +85,39 @@ export default {
       }
     },
 
-    changePage(pageNumber) {
-      this.page = pageNumber;
+    async loadMorePosts() {
+      this.page += 1;
+      try {
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            params: {
+              _page: this.page,
+              _limit: this.limit,
+            },
+          }
+        );
+
+        this.posts = [...this.posts, ...response.data];
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 
   mounted() {
     this.fetchPosts();
+    const options = {
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+    const callback = (entries) => {
+      if (entries[0].isIntersecting && this.page < this.totalPages) {
+        this.loadMorePosts();
+      }
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(this.$refs.observer);
   },
   computed: {
     sortedPosts() {
@@ -117,11 +133,7 @@ export default {
       );
     },
   },
-  watch: {
-    page() {
-      this.fetchPosts();
-    },
-  },
+  watch: {},
 };
 </script>
 

@@ -4,6 +4,7 @@
     <div class="form-item">
       <label for="input-title">
         <app-input
+          v-focus
           v-model="post.title"
           id="input-title"
           placeholder="Post title"

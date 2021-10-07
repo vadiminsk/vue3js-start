@@ -41,6 +41,12 @@ export default {
   border-radius: 5px;
 }
 
+.post__btns {
+  display: flex;
+  justify-content: flex-end;
+  flex-basis: 300px;
+}
+
 .post__btns button:not(:last-child) {
   margin-right: 10px;
 }
